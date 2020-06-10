@@ -19,7 +19,9 @@ export class SignUpComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['', [ Validators.required,
+    Validators.pattern('^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$')
+   ]],
             confirmPassword: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'confirmPassword')
