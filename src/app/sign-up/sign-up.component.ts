@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-// import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../must-match-validator';
+import { PasswordValidator  } from '../password-validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,9 +19,7 @@ export class SignUpComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [ Validators.required,
-    Validators.pattern('^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$')
-   ]],
+            password: ['', [ Validators.required, Validators.minLength(8),PasswordValidator.strong]],
             confirmPassword: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'confirmPassword')
